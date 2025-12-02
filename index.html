@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria Personalizado</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:900,300,500|Roboto|Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <div class="finJuego">
+        <div class="popup"> 
+            <h1>¡Felicidades Amor! ¡Has ganado, eres increible guapilla! 🥳</h1>
+            <p>¡Has encontrado los 6 pares de tu bella carita!</p>
+            <div class="boton" onclick="reiniciarJuegoTotal()"> 
+                Volver a jugar
+            </div>
+        </div>
+    </div>
+
+    <div class="presentacion">
+        <div class="card">
+            <div class="parte1">
+                <h4>Memorias de amor</h4>
+                <span>Para el amor de mi vida</span>
+                <p>Encuentra todos los pares para ganar el juego guapilla.</p>
+                <div class="btn-jugar" onclick="comenzarJuego()">
+                    Jugar
+                </div>
+            </div>
+            <div class="parte2">
+                <img src="img/fondo.jpg" alt="Cartas de Memoria">
+            </div>
+        </div>
+    </div>
+
+    <div class="gridJuego">
+        </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

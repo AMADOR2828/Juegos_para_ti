@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: #B3E5FC;
+    min-height: 100vh;
+}
+
+/* --- CLASE DE CONTROL DE SCROLL --- */
+.no-scroll {
+    overflow: hidden;
+}
+/* ---------------------------------- */
+
+
+/* --- Pantallas Globales (Centrado Vertical y Horizontal) --- */
+
+.presentacion, .finJuego {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Centrado Horizontal */
+    align-items: center; /* Centrado Vertical */
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* Pantalla de Fin de Juego (Fixed para centrar en la vista) */
+.finJuego {
+    background: #B3E5FC; 
+    position: fixed; 
+}
+
+/* --- ESTILOS DEL POP-UP DE VICTORIA --- */
+.finJuego .popup {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    text-align: center; /* Centra el texto y el botón dentro del pop-up */
+    max-width: 90%;
+    transform: scale(0.9); 
+    transition: all 0.5s ease-out;
+}
+
+.finJuego h1 {
+    color: #FF4081; 
+    text-shadow: none;
+    margin-bottom: 10px;
+    font-size: 2.5em; 
+    font-weight: 900;
+}
+
+.finJuego p {
+    color: #444;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+}
+/* ------------------------------------------------ */
+
+
+/* --- Estilos de la Tarjeta de Presentación y Botón --- */
+
+.presentacion .card {
+    width: 90%; 
+    max-width: 800px; 
+    background: #FF4081;
+    height: auto;
+    min-height: 55vh;
+    box-shadow: 0px 10px 24px -4px rgba(0, 0, 0, 0.58);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Por defecto, una columna para móvil */
+    padding: 20px;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .presentacion .card {
+        flex-direction: row; /* Dos columnas en escritorio */
+        width: 70%;
+        padding: 5%;
+    }
+    .presentacion .card .parte1 {
+        width: 50%;
+        padding-right: 20px;
+        text-align: left; /* Alineación a la izquierda si está en diseño de dos columnas */
+    }
+    .presentacion .card .parte2 {
+        width: 50%;
+        text-align: center;
+    }
+}
+
+/* Regla CLAVE para centrar el texto en una sola columna (Móvil) */
+.presentacion .card .parte1, .presentacion .card .parte2 {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+.presentacion .card .parte2 img {
+    display: block;
+    width: 60%;
+    max-width: 250px;
+    margin: 20px auto;
+    border-radius: 3px;
+    box-shadow: 0px 10px 24px -4px rgba(0, 0, 0, 0.58);
+}
+.presentacion .card .parte1 .btn-jugar {
+    width: 150px;
+    border-radius: 4px;
+    border: solid 2px white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 22px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin: 20px auto 0;
+}
+.boton {
+    width: 180px;
+    height: 40px;
+    border-radius: 4px;
+    padding: 10px;
+    background: #FF4081;
+    color: white;
+    text-align: center;
+    box-shadow: 0px 10px 24px -4px rgba(0, 0, 0, 0.58);
+    cursor: pointer;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    transition: transform 0.2s, background 0.2s; 
+}
+.boton:hover {
+    transform: scale(1.05);
+    background: #c53366;
+}
+
+/* --- Tablero del Juego (Grid 4x3) --- */
+
+.gridJuego {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%; 
+    max-width: 500px; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px; 
+    opacity: 0;
+    transition: 0.3s all;
+}
+
+.caja {
+    position: relative;
+    padding-top: 100%;
+    width: 100%;
+    height: 0;
+    cursor: pointer;
+}
+
+.caja div.a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.58);
+    border-radius: 8px;
+    background: white;
+}
+
+.cF, .cA {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* Cara Frontal (Oculta) */
+.cF {
+    background: url(https://i.imgur.com/G8nWCzb.png); 
+    background-size: 70%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #f0f0f0;
+    border: 2px solid #fff;
+}
+
+/* Cara Trasera (Fotos sin cortar) */
+.cA {
+    transform: rotateY(180deg);
+    background-size: contain; /* ¡CLAVE: Asegura que la foto se vea completa! */
+    background-color: white; 
+    padding: 5px; 
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* CLASES DE LAS FOTOS (Rutas Locales) */
+.c0 { background-image: url('./img/foto1.jpg'); }
+.c1 { background-image: url('./img/foto2.jpg'); }
+.c2 { background-image: url('./img/foto3.jpg'); }
+.c3 { background-image: url('./img/foto4.jpg'); }
+.c4 { background-image: url('./img/foto5.jpg'); }
+.c5 { background-image: url('./img/foto6.jpg'); }
+
+.rotar {
+    transform: rotateY(180deg);
+}
